@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { getYaml } from "../../backend/getYAML";
-//import { extractInstanceMap } from "../../backend/extractInstanceMap"
-//import { validateYamlString } from "../../backend/validateYamlString"
+import extractInstanceMap from "../../backend/extractInstanceMap"
+import validateYaml from "../../backend/validateYaml"
 
 export const dataSlice = createSlice({
     name: 'data',
@@ -20,15 +20,15 @@ export const dataSlice = createSlice({
             state.errors = []
         },
         fetchYaml: (state) => {state.yamlString = getYaml()},
-        /*ExtractInstanceMap: (state) => {
+        ExtractInstanceMap: (state) => {
             const linkedBase = "/#/definitions/language";
             const {newInstanceMatrix, newInstanceMap} = extractInstanceMap(state.yamlString, linkedBase, state.errors)
             state.instanceMatrix = newInstanceMatrix;
             state.instanceMap = newInstanceMap;
-        },*/
-        //validate: (state) => {state.errors = validateYamlString(state.yamlString)},
+        },
+        Validate: (state) => {state.errors = validateYaml(state.yamlString)},
     }
 })
 
-export const {ResetToDefault, fetchYaml} = dataSlice.actions
+export const {ResetToDefault, fetchYaml, ExtractInstanceMap, Validate} = dataSlice.actions
 export default dataSlice.reducer

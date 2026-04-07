@@ -1,0 +1,12 @@
+.ribbons {
+    fill-opacity: .7;
+    stroke: #000;
+    stroke-width: .25px;
+}
+
+.aligner {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

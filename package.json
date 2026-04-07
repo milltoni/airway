@@ -14,12 +14,15 @@
     "brace": "^0.11.1",
     "d3": "^7.9.0",
     "gh-pages": "^6.3.0",
+    "jsonschema": "^1.5.0",
     "react": "^19.2.4",
     "react-ace": "^14.0.1",
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "util": "^0.12.5",
+    "web-vitals": "^2.1.4",
+    "yaml-js": "github:chisler/yaml-js"
   },
   "scripts": {
     "start": "react-scripts start",
