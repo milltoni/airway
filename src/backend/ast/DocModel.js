@@ -61,7 +61,6 @@ export function getAllByBase(docModel, isBaseNeeded) {
     if (!docModel) {
       return;
     }
-
     if (isBaseNeeded(docModel.base)) {
       nodes.push({
         //trim first dot from path
@@ -81,17 +80,13 @@ export function getAllByBase(docModel, isBaseNeeded) {
 }
 
 export function getAllReferences(docModel) {
-  //Filter out array nodes because
-  //children will be found anyway
-
   return getAllByBase(docModel, isBaseReference).filter(
     ({ nodeValue }) => !Array.isArray(nodeValue)
   );
 }
 
 export function isBaseReference(base) {
-  const references = "#/$defs/references/";
-
+  const references = "#/$defs/references";
   return base && base.slice(0, references.length) === references;
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchYaml } from "../store/slices/dataSlice";
+import { fetchYaml, ExtractInstanceMap } from "../store/slices/dataSlice";
 
 import Header from "./header/header";
 import BrowseField from "./main_field/browse_mode/BrowseField";
@@ -17,7 +17,7 @@ const App = () => {
     
     React.useEffect(() => {
         dispatch(fetchYaml());
-        //dispatch();
+        dispatch(ExtractInstanceMap());
     }, []);
     return (
         <div>

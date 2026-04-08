@@ -27,8 +27,8 @@ const Editor = () => {
     const [editor] = React.useState(null);
 
     const rebuild = () => {
-        dispatch(Validate());
-        dispatch(ExtractInstanceMap());
+        //dispatch(Validate());
+        //dispatch(ExtractInstanceMap());
     };
 
     const onChange = (value) => {
@@ -43,9 +43,9 @@ const Editor = () => {
     
         onChange(value);
         rebuild();
-        console.log(ima);
+        /*console.log(ima);
         console.log(im);
-        console.log(errors);
+        console.log(errors);*/
     
         //Disable automatic error-marker correction by ace
         session.off("change", editor.renderer.$gutterLayer.$updateAnnotations);

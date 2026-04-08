@@ -24,7 +24,7 @@
     "react-scripts": "5.0.1",
     "util": "^0.12.5",
     "web-vitals": "^2.1.4",
-    "yaml-js": "github:chisler/yaml-js"
+    "yaml-js": "github:chisler/yaml-js#master"
   },
   "scripts": {
     "start": "react-scripts start",

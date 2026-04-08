@@ -2,9 +2,9 @@ import {
     getAllReferences,
     getInstanceMap,
     getReferencesFromNodes
-  } from "./ast/DocModel"; //+
-  import parseYAML from "./parser/yaml_parser"; //+
-  import validateProjectSchema from "./validators/structure/structure_validator"; //+
+  } from "./ast/DocModel";
+  import parseYAML from "./parser/yaml_parser";
+  import validateProjectSchema from "./validators/structure/structure_validator";
   
   const getZeroMatrix = dimensions => {
     let array = [];
@@ -60,20 +60,24 @@ import {
     //4. links = getAllByBase(linkBase)
     //5. each(links, link => {return ...{referral: instance.name, referenced: instance.name} })
     //6. links => Fill linkedMatrix
+    
     if (errors.length) {
       return {}
     }
-  
+
     let parsedYaml = parseYAML(yamlString);
     const dM = validateProjectSchema(parsedYaml.jsonObj, yamlString).docModel;
+    console.log(dM);
   
     const referenceNodes = getAllReferences(dM);
+    console.log(referenceNodes);
     const references = getReferencesFromNodes(
       dM,
       yamlString,
       referenceNodes,
       linkedBase
     );
+
   
     if (!references.length > 0) {
       return {};
@@ -85,7 +89,6 @@ import {
     return {
       instanceMatrix,
       instanceMap,
-      dM
     };
   };
   

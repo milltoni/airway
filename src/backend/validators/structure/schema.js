@@ -1,6 +1,5 @@
 export default {
-    $schema: "https://json-schema.org/draft/2020-12/schema",
-    id: "https://example.com/schema.json",
+    $schema: "http://json-schema.org/draft-07/schema",
     type: "object",
     patternProperties: {
       "^[a-zA-Z]": { $ref: "#/$defs/language" }

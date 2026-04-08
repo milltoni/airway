@@ -5,7 +5,7 @@ import validateProjectSchema from "./validators/structure/structure_validator"; 
 
 import memoize from "lodash/memoize";
 
-export const validateYamlString = (yamlString, validateSchema) => {
+export const validateYaml = (yamlString, validateSchema) => {
   let parsedYaml = parseYAML(yamlString);
   if (parsedYaml.error) {
     return {
@@ -15,7 +15,7 @@ export const validateYamlString = (yamlString, validateSchema) => {
   let jsonObj = parsedYaml.jsonObj;
 
   // Structural validation
-  let validatedSchema = validateSchema(jsonObj, yamlString);
+  const validatedSchema = validateSchema(jsonObj, yamlString);
   let dM = validatedSchema.docModel;
 
   // Semantic validation
@@ -27,8 +27,8 @@ export const validateYamlString = (yamlString, validateSchema) => {
   };
 };
 
-let cachedValidateYamlString = memoize(yamlString =>
-  validateYamlString(yamlString, validateProjectSchema)
+let ValidateYamlString = memoize(yamlString =>
+  validateYaml(yamlString, validateProjectSchema)
 );
 
-export default cachedValidateYamlString;
+export default ValidateYamlString;

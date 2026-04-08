@@ -11,44 +11,23 @@ const ajv = new Ajv({
 });
 
 // Функция для кастомной обработки данных (аналог rewrite из jsonschema)
-const processDataWithPaths = (data, schemaPath = "") => {
+const processDataWithPaths = (data, schemaPath = "#/$defs/language") => {
   if (data === null || typeof data !== "object") {
     return { value: data, base: schemaPath };
   }
   
   if (Array.isArray(data)) {
-    return data.map((item, index) => 
+    const wrappedArray = data.map((item, index) => 
       processDataWithPaths(item, `${schemaPath}/${index}`)
     );
+    return { value: wrappedArray, base: schemaPath };
   }
   
   const result = {};
   for (const [key, value] of Object.entries(data)) {
     result[key] = processDataWithPaths(value, `${schemaPath}/${key}`);
   }
-  return result;
-};
-
-// Функция для восстановления исходной структуры из обёрнутой
-const unwrapData = (wrapped) => {
-  if (wrapped === null || typeof wrapped !== "object") {
-    return wrapped?.value ?? wrapped;
-  }
-  
-  if (Array.isArray(wrapped)) {
-    return wrapped.map(item => unwrapData(item));
-  }
-  
-  // Если это объект с полем value — это наш враппер
-  if ("value" in wrapped && Object.keys(wrapped).length === 2 && "base" in wrapped) {
-    return wrapped.value;
-  }
-  
-  const result = {};
-  for (const [key, value] of Object.entries(wrapped)) {
-    result[key] = unwrapData(value);
-  }
-  return result;
+  return { value: result, base: schemaPath };
 };
 
 const validateCustomSchema = (jsonObj, yamlString, schema) => {
@@ -57,6 +36,7 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
   try {
     validate = ajv.compile(schema);
   } catch (error) {
+    console.log(error.message);
     return {
       docModel: jsonObj,
       errors: [{
@@ -66,7 +46,6 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
       }]
     };
   }
-  
   // 2. Выполняем валидацию
   const valid = validate(jsonObj);
   
