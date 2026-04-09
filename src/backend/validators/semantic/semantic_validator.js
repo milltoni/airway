@@ -1,7 +1,7 @@
-import { isPathValid, getBaseForPath } from "../../ast/DocModel";//+
-import { pathToArray } from "../../PathToArray"; //+
-import { getLineForPath } from "../../ast/ast"; //+
-import schema from "../structure/schema"; //+
+import { isPathValid, getBaseForPath } from "../../ast/DocModel";
+import { pathToArray } from "../../PathToArray";
+import { getLineForPath } from "../../ast/ast";
+import schema from "../structure/schema";
 
 export function validateReferences(docModel, yamlString, references) {
   return {
@@ -16,6 +16,7 @@ export function validateReferences(docModel, yamlString, references) {
 //Returns only errors
 function validateReference(docModel, yamlString, reference) {
   const referenceArray = pathToArray(reference.nodeValue);
+  console.log(referenceArray);
 
   //validate presence
   if (!isPathValid(docModel, referenceArray)) {

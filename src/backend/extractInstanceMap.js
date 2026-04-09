@@ -40,7 +40,6 @@ import {
       instanceMatrix[referralLanguageIndex][referencedLanguageIndex]++;
     });
   
-    // Link to itself is added to nodes without links
     const anyReference = (i, instanceMatrix) => {
       return instanceMatrix[i].some(Boolean);
     };
@@ -54,12 +53,6 @@ import {
   };
   
   const extractInstanceMap = (yamlString, linkedBase, errors) => {
-    //1 Input: linkedBase, linkBase, linkType
-    //2. linkedInstances = getAllByBase(linkedBase)
-    //3. linkedMap = getMap(linkedInstances)
-    //4. links = getAllByBase(linkBase)
-    //5. each(links, link => {return ...{referral: instance.name, referenced: instance.name} })
-    //6. links => Fill linkedMatrix
     
     if (errors.length) {
       return {}
@@ -67,17 +60,14 @@ import {
 
     let parsedYaml = parseYAML(yamlString);
     const dM = validateProjectSchema(parsedYaml.jsonObj, yamlString).docModel;
-    console.log(dM);
   
     const referenceNodes = getAllReferences(dM);
-    console.log(referenceNodes);
     const references = getReferencesFromNodes(
       dM,
       yamlString,
       referenceNodes,
       linkedBase
     );
-
   
     if (!references.length > 0) {
       return {};

@@ -1,5 +1,5 @@
 import { pathToArray } from "../PathToArray";
-import { getLineForPath } from "./ast"; //+
+import { getLineForPath } from "./ast";
 
 export function getBaseForPath(docModel, pathArray) {
   let node = docModel;
@@ -86,7 +86,7 @@ export function getAllReferences(docModel) {
 }
 
 export function isBaseReference(base) {
-  const references = "#/$defs/references";
+  const references = "/#/definitions/references/";
   return base && base.slice(0, references.length) === references;
 }
 
@@ -114,7 +114,6 @@ export function getReferencesFromNodes(
   referenceNodes
     .forEach(({ path, nodeValue }) => {
       const fullPathArray = pathToArray(path);
-
       const value = pathToArray(
         getNodeByBaseInPath(docModel, linkedBase, nodeValue)
       );

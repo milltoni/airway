@@ -24,7 +24,11 @@ const HowToAdd = () => {
                             x
                     </button>
                     <div>
-                        <p className="mainn">This is How To Add information field</p>
+                        <p className="mainn">We will soon post a complete guide here, 
+                            in which you will find a description of the editor's main functions, 
+                            a list of hotkeys for convenient work, 
+                            a data schema with its explanation, 
+                            as well as instructions on how to submit a request to have your materials appear on this resource.</p>
                     </div>
                 </div>
             </div>

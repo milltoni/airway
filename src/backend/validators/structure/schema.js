@@ -2,13 +2,14 @@ export default {
     $schema: "http://json-schema.org/draft-07/schema",
     type: "object",
     patternProperties: {
-      "^[a-zA-Z]": { $ref: "#/$defs/language" }
+      "^[a-zA-Z]": {$ref: "#/$defs/language"} ,
     },
     $defs: {
       language: {
         type: "object",
         properties: {
           name: { type: "string" },
+          //date: {type: "Date"}
           creator: { type: "string" },
           description: { type: "string" },
           people: { type: "array", items: { type: "string" } },

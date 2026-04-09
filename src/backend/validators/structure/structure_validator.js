@@ -3,19 +3,35 @@ import { getLineForPath } from "../../ast/ast";
 import { pathToArray } from "../../PathToArray";
 import projectSchema from "./schema";
 
-// Инициализация Ajv с нужными опциями
 const ajv = new Ajv({
-  allErrors: true,        // собирать все ошибки, а не первую
-  verbose: true,          // включать дополнительную информацию (instancePath и т.д.)
-  strict: false           // отключаем строгую проверку схем (если нужно)
+  allErrors: true,        
+  verbose: true,          
+  strict: false           
 });
 
-// Функция для кастомной обработки данных (аналог rewrite из jsonschema)
-const processDataWithPaths = (data, schemaPath = "#/$defs/language") => {
+const processDataWithPaths = (data, schemaPath = "/") => {
   if (data === null || typeof data !== "object") {
-    return { value: data, base: schemaPath };
+    if (schemaPath.includes("/#/$defs/references/anyReference")) {
+      return {value: data, base: "/#/defs/references/singleAnyReference"};
+    }
+    if (schemaPath.includes("/#/$defs/feature/inspired_by") || schemaPath.includes("/#/$defs/feature/predated_by") || schemaPath.includes("/#/$defs/feature/justified_by")){
+      return {value: data, base: "/#/$defs/references/anyReference"};
+    }
+    return { value: data, base: "/" };
   }
-  
+
+  if (schemaPath.includes("/#/$defs/language/influenced") || schemaPath.includes("/#/$defs/language/influenced_by")) {
+    schemaPath = "/#/$defs/references/anyReference";
+  }
+
+  if (schemaPath.includes("/#/$defs/features")) {
+    schemaPath = "/#/$defs/feature";
+  }
+
+  if (schemaPath.includes("/#/$defs/language/features")) {
+    schemaPath = "/#/$defs/features";
+  }
+
   if (Array.isArray(data)) {
     const wrappedArray = data.map((item, index) => 
       processDataWithPaths(item, `${schemaPath}/${index}`)
@@ -24,6 +40,11 @@ const processDataWithPaths = (data, schemaPath = "#/$defs/language") => {
   }
   
   const result = {};
+
+  if (schemaPath.includes("//")){
+    schemaPath = "/#/$defs/language";
+  }
+
   for (const [key, value] of Object.entries(data)) {
     result[key] = processDataWithPaths(value, `${schemaPath}/${key}`);
   }
@@ -31,7 +52,6 @@ const processDataWithPaths = (data, schemaPath = "#/$defs/language") => {
 };
 
 const validateCustomSchema = (jsonObj, yamlString, schema) => {
-  // 1. Компилируем или используем валидатор
   let validate;
   try {
     validate = ajv.compile(schema);
@@ -46,33 +66,23 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
       }]
     };
   }
-  // 2. Выполняем валидацию
   const valid = validate(jsonObj);
   
-  // 3. Применяем кастомную обработку данных (аналог rewrite)
-  // Сначала оборачиваем данные, добавляя информацию о путях
   const wrappedData = processDataWithPaths(jsonObj);
   
-  // Применяем rewrite-логику: данные уже обёрнуты с путями
-  // Возвращаем docModel с обёрнутыми значениями (как в оригинале)
   const docModel = wrappedData;
   
-  // 4. Обработка ошибок
   let errors = [];
   
   if (!valid && validate.errors) {
     errors = validate.errors.map(err => {
-      // Получаем путь из instancePath (формат /property/subproperty)
       let path = err.instancePath || "";
-      // Убираем начальный слеш и заменяем / на . для совместимости с оригиналом
       path = path.replace(/^\//, "").replace(/\//g, ".");
-      
-      // Если путь пустой, но ошибка связана с корнем
+
       if (!path && err.keyword === "required" && err.params.missingProperty) {
         path = err.params.missingProperty;
       }
       
-      // Формируем сообщение как в оригинале
       let message = err.message || "";
       if (err.keyword === "additionalProperties") {
         message = `has additional property '${err.params.additionalProperty}'`;
@@ -86,7 +96,6 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
         message = `must be equal to one of the allowed values: ${err.params.allowedValues.join(", ")}`;
       }
       
-      // Получаем номер строки из YAML
       const pathArray = path ? pathToArray(path) : [];
       const line = path ? getLineForPath(yamlString, pathArray) : null;
       
@@ -98,17 +107,12 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
     });
   }
   
-  // 5. Если нет ошибок, но нужно применить rewrite к валидным данным
-  // В оригинале rewrite применялся всегда, даже при ошибках
-  // Здесь мы уже применили обёртку через processDataWithPaths
-  
   return {
     docModel: docModel,
     errors: errors
   };
 };
 
-// Каррирование для конкретных схем (функционал сохранён)
 export const validateCustomSchemaClosure = schema => (jsonObj, yamlString) =>
   validateCustomSchema(jsonObj, yamlString, schema);
 

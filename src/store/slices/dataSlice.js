@@ -21,12 +21,12 @@ export const dataSlice = createSlice({
         },
         fetchYaml: (state) => {state.yamlString = getYaml()},
         ExtractInstanceMap: (state) => {
-            const linkedBase = "#/$defs/language";
+            const linkedBase = "/#/$defs/language";
             const dm = extractInstanceMap(state.yamlString, linkedBase, state.errors);
             state.instanceMatrix = dm.instanceMatrix;
             state.instanceMap = dm.instanceMap;
         },
-        Validate: (state) => {state.errors = validateYamlString(state.yamlString)},
+        Validate: (state) => {state.errors = validateYamlString(state.yamlString).errors},
         setValue: (state, action) => {state.yamlString = action.payload},
     }
 })

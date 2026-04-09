@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { DisplayMode, EditorMode } from "../../store/slices/modeSlice";
 import { isEditorMode } from "../../constants";
-import { ShowPopup } from "../../store/slices/popupSlice"
 import { ShowOrHideAddInfo } from "../../store/slices/add_infoSlice";
+import { ShowOrHidePRform } from "../../store/slices/pullrequestSlice";
 import { ResetToDefault, fetchYaml } from "../../store/slices/dataSlice";
 
 import logo from "./logo.svg";
@@ -27,10 +27,11 @@ const Links = props => {
 };
   
   const Header = () => {
-    const mode = useSelector((state) => state.mode.mode)
-    const add_info = useSelector((state) => state.add_info.isShown)
+    const mode = useSelector((state) => state.mode.mode);
+    const add_info = useSelector((state) => state.add_info.isShown);
+    const prf = useSelector((state) => state.PullRequestForm.isShown);
     //const data = useSelector((state) => state.data.yamlString);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const resetAndFetch = () => {
       dispatch(ResetToDefault());
@@ -53,7 +54,7 @@ const Links = props => {
       links: [
         <a href="https://github.com/milltoni/airway.git">GitHub</a>,
         <a href="#" onClick={() => dispatch(ShowOrHideAddInfo(add_info ? false : true))}>How to Use</a>,
-        <a href="#" onClick={() => dispatch(ShowPopup)}>Create Pull Request</a>,
+        <a href="#" onClick={() => dispatch(ShowOrHidePRform(prf ? false : true))}>Create Pull Request</a>,
         <a href="#" onClick={() => resetAndFetch()}>Reset</a>
       ],
       action: (
