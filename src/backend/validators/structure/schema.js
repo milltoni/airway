@@ -9,7 +9,6 @@ export default {
         type: "object",
         properties: {
           name: { type: "string" },
-          //date: {type: "Date"}
           creator: { type: "string" },
           description: { type: "string" },
           people: { type: "array", items: { type: "string" } },

@@ -20,8 +20,6 @@ import "./Editor.css";
 const Editor = () => {
     const yamlString = useSelector((state) => state.data.yamlString);
     const errors = useSelector((state) => state.data.errors);
-    const im = useSelector((state) => state.data.instanceMatrix);
-    const ima = useSelector((state) => state.data.instanceMap);
     const dispatch = useDispatch();
 
     const [editor] = React.useState(null);
@@ -45,10 +43,10 @@ const Editor = () => {
         rebuild();
     
         //Disable automatic error-marker correction by ace
-        session.off("change", editor.renderer.$gutterLayer.$updateAnnotations);
+        //session.off("change", editor.renderer.$gutterLayer.$updateAnnotations);
     
         //After dot completion
-        editor.commands.on("afterExec", function(e, t) {
+       /* editor.commands.on("afterExec", function(e, t) {
           if (e.command.name === "insertstring" && e.args === ".") {
             e.editor.execCommand("startAutocomplete");
           }

@@ -10,6 +10,17 @@ import "./graph.css"
 const graph = () => {
     const instanceMatrix = useSelector(state.data.instanceMatrix);
     const instanceMap = useSelector(state.data.instanceMap);
+
+    if (!instanceMap) {
+        return null;
+      }
+
+    const width = 928;
+    const height = 680;
+
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+
     return (
         <div className="aligner">
             <svg
@@ -18,11 +29,13 @@ const graph = () => {
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
             >
-                <g className="groups">
-                    <Vertices />
-                </g>
-                <g className="ribons">
-                    <Lines />
+                <g id="circle" /*transform={`translate(${moveToCenter},0)`}*/>
+                    <g className="groups">
+                        <Vertices />
+                    </g>
+                    <g className="ribons">
+                        <Lines />
+                    </g>
                 </g>
             </svg>
         </div>
