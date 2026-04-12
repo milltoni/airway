@@ -16,7 +16,6 @@ export function validateReferences(docModel, yamlString, references) {
 //Returns only errors
 function validateReference(docModel, yamlString, reference) {
   const referenceArray = pathToArray(reference.nodeValue);
-  console.log(referenceArray);
 
   //validate presence
   if (!isPathValid(docModel, referenceArray)) {
