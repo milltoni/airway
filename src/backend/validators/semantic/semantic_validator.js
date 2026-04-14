@@ -13,11 +13,8 @@ export function validateReferences(docModel, yamlString, references) {
   };
 }
 
-//Returns only errors
 function validateReference(docModel, yamlString, reference) {
   const referenceArray = pathToArray(reference.nodeValue);
-
-  //validate presence
   if (!isPathValid(docModel, referenceArray)) {
     return {
       message: `Invalid reference ${reference.nodeValue}`,
@@ -27,6 +24,7 @@ function validateReference(docModel, yamlString, reference) {
   }
 
   const destinationBase = getBaseForPath(docModel, referenceArray);
+  //console.log(destinationBase);
   if (!isDestinationValid(destinationBase, reference.base, schema)) {
     return {
       message: `Invalid destination ${destinationBase}. Valid destinations: ${getValidDestinations(reference.base, schema)}`,
@@ -38,14 +36,13 @@ function validateReference(docModel, yamlString, reference) {
 
 function isDestinationValid(destinationBase, referenceBase, schema) {
   const validDestinations = getValidDestinations(referenceBase, schema);
-
-  return validDestinations && validDestinations.includes(destinationBase);
+  return validDestinations && validDestinations.includes(destinationBase.slice(1));
 }
 
 function getValidDestinations(referenceType, schema) {
   const definitionArray = referenceType.split("/").slice(2);
+  
   let pointer = schema;
-
   definitionArray.forEach(key => {
     pointer = pointer[key];
   });

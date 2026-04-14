@@ -25,7 +25,7 @@ const Editor = () => {
     const [editor] = React.useState(null);
 
     const rebuild = () => {
-        dispatch(Validate());
+        //dispatch(Validate());
         dispatch(ExtractInstanceMap());
     };
 
@@ -43,10 +43,10 @@ const Editor = () => {
         rebuild();
     
         //Disable automatic error-marker correction by ace
-        //session.off("change", editor.renderer.$gutterLayer.$updateAnnotations);
+        session.off("change", editor.renderer.$gutterLayer.$updateAnnotations);
     
         //After dot completion
-       /* editor.commands.on("afterExec", function(e, t) {
+        editor.commands.on("afterExec", function(e, t) {
           if (e.command.name === "insertstring" && e.args === ".") {
             e.editor.execCommand("startAutocomplete");
           }

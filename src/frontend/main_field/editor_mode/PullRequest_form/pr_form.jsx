@@ -1,7 +1,7 @@
 import React, { useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { ShowOrHidePRform } from "../../store/slices/pullrequestSlice";
+import { ShowOrHidePRform } from "../../../../store/slices/pullrequestSlice";
 
 import './pr_form.css';
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchYaml, ExtractInstanceMap } from "../store/slices/dataSlice";
+import { fetchYaml, ExtractInstanceMap, Validate } from "../store/slices/dataSlice";
 
 import Header from "./header/header";
 import BrowseField from "./main_field/browse_mode/BrowseField";
@@ -9,7 +9,7 @@ import EditorContainer from "./main_field/editor_mode/EditorContainer";
 
 import { isEditorMode } from "../constants";
 
-import "./App.css"
+//import "./App.css"
 
 const App = () => {
     const mode = useSelector((state) => state.mode.mode);
@@ -17,8 +17,10 @@ const App = () => {
     
     React.useEffect(() => {
         dispatch(fetchYaml());
+        dispatch(Validate());
         dispatch(ExtractInstanceMap());
     }, []);
+
     return (
         <div>
             <Header />

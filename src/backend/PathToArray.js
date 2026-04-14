@@ -4,7 +4,7 @@ export function pathToArray(pathString) {
     }
   
     let str;
-    //Strange errors may exists
+
     if (!pathString) {
       console.warn("Strange pathString behaviour.")
       return [];
@@ -17,7 +17,6 @@ export function pathToArray(pathString) {
       str = pathString.trim();
     }
   
-    //in case of key with space: instance["key with spaces"]
     if (!str || str.includes('[')) {
       return []
     }
@@ -26,7 +25,6 @@ export function pathToArray(pathString) {
       str
         .split(".")
         .map(item => {
-          // array[index] -> ['array', 'index']
           if (item.includes("[")) {
             return (/^(\w+)\s*((?:\[\s*\d+\s*\]\s*)*)$/.exec(item) || [null])
               .slice(1)
@@ -35,7 +33,6 @@ export function pathToArray(pathString) {
             return item;
           }
         })
-        //flatten
         .reduce(function(a, b) {
           return a.concat(b);
         }, [])

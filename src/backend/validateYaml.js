@@ -13,15 +13,13 @@ export const validateYaml = (yamlString, validateSchema) => {
     };
   }
   let jsonObj = parsedYaml.jsonObj;
-
   // Structural validation
   const validatedSchema = validateSchema(jsonObj, yamlString);
   let dM = validatedSchema.docModel;
-
   // Semantic validation
   const referenceNodes = getAllReferences(dM);
   const v = validateReferences(dM, yamlString, referenceNodes);
-
+  //console.log(v);
   return {
     errors: [...v.errors, ...validatedSchema.errors]
   };

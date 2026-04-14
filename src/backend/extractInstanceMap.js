@@ -59,6 +59,7 @@ import {
 
     let parsedYaml = parseYAML(yamlString);
     const dM = validateProjectSchema(parsedYaml.jsonObj, yamlString).docModel;
+
     const referenceNodes = getAllReferences(dM);
     const references = getReferencesFromNodes(
       dM,
@@ -66,10 +67,11 @@ import {
       referenceNodes,
       linkedBase
     );
+
     if (!references.length > 0) {
       return {};
     }
-  
+
     const instanceMap = getInstanceMap(dM, linkedBase);
     const instanceMatrix = getInstanceMatrix(instanceMap, references);
     return {

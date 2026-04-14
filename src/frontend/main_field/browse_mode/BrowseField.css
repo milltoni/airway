@@ -1,52 +1,26 @@
-.info {
+.container1 {
     background: #f1f5f9;
-    font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
-    min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    overflow: hidden;
+    flex-direction: row;
+    padding-top: 50px;
+    align-items: flex-start;
+    height: calc(100vh - 50px);
+    flex: 1;
 }
 
-.containerr {
-    max-width: 600px;
-    width: 100%;
+.right1 {
+    overflow-y: scroll;
 }
 
-.emoji {
-    font-size: 6rem;
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    line-height: 1;
+.left1, .right1 {
+    height: calc(100vh - 50px);
+    flex: 1;
+    flex-basis: 50%;
+    overflow-y: auto;
 }
 
-h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 1rem;
-    letter-spacing: -0.01em;
-}
-
-.pp {
-    font-size: 1.1rem;
-    color: #334155;
-    line-height: 1.5;
-    margin-bottom: 2rem;
-}
-
-hr {
-    width: 60px;
-    margin: 1.8rem auto;
-    border: none;
-    height: 2px;
-    background: #cbd5e1;
-    border-radius: 2px;
-}
-
-.small-note {
-    font-size: 0.85rem;
-    color: #64748b;
+.left1 {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px);
 }

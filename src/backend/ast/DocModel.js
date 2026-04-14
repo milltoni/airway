@@ -11,7 +11,6 @@ export function getBaseForPath(docModel, pathArray) {
     }
   }
 
-  //default case for not scheme-valid nodes
   return node.base || "/";
 }
 
@@ -34,7 +33,6 @@ export function isPathValid(docModel, pathArray) {
   return true;
 }
 
-//if path is incorrect, returns docModel
 export function getDmNodeByPath(docModel, pathArray) {
   let node = docModel;
   let key;
@@ -63,7 +61,6 @@ export function getAllByBase(docModel, isBaseNeeded) {
     }
     if (isBaseNeeded(docModel.base)) {
       nodes.push({
-        //trim first dot from path
         path: pathString.slice(1),
         nodeValue: docModel.value,
         base: docModel.base
@@ -72,7 +69,6 @@ export function getAllByBase(docModel, isBaseNeeded) {
 
     if (docModel && docModel.value && typeof docModel.value !== "string") {
       Object.keys(docModel.value).forEach(key => {
-        //keys of array are indices
         find(docModel.value[key], pathString + "." + key.toString());
       });
     }
@@ -134,8 +130,6 @@ export function getReferencesFromNodes(
   return references.filter(Boolean);
 }
 
-//gets pathString e.g. kotlin.features.f1.inspired_by and gets the pathString of Base===base
-//kotlin.features.f1.inspired_by + "/#/definitions/language/" = kotlin
 export function getNodeByBaseInPath(docModel, base, pathString) {
   const pathArray = pathToArray(pathString);
   let subPath;

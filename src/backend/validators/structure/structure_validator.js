@@ -12,7 +12,7 @@ const ajv = new Ajv({
 const processDataWithPaths = (data, schemaPath = "/") => {
   if (data === null || typeof data !== "object") {
     if (schemaPath.includes("/#/$defs/references/anyReference")) {
-      return {value: data, base: "/#/defs/references/singleAnyReference"};
+      return {value: data, base: "/#/$defs/references/singleAnyReference"};
     }
     if (schemaPath.includes("/#/$defs/feature/inspired_by") || schemaPath.includes("/#/$defs/feature/predated_by") || schemaPath.includes("/#/$defs/feature/justified_by")){
       return {value: data, base: "/#/$defs/references/anyReference"};
