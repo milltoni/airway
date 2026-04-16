@@ -16,7 +16,7 @@
     height: calc(100vh - 50px);
     flex: 1;
     flex-basis: 50%;
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .left1 {

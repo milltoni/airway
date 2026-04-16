@@ -41,7 +41,7 @@ function isDestinationValid(destinationBase, referenceBase, schema) {
 
 function getValidDestinations(referenceType, schema) {
   const definitionArray = referenceType.split("/").slice(2);
-  
+
   let pointer = schema;
   definitionArray.forEach(key => {
     pointer = pointer[key];

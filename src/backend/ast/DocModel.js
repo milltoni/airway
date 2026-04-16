@@ -6,7 +6,7 @@ export function getBaseForPath(docModel, pathArray) {
 
   for (let i = 0; i < pathArray.length; i++) {
     node = node.value[pathArray[i]];
-    if (!node){
+    if (!node) {
       return "/"
     }
   }

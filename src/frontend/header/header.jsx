@@ -25,64 +25,64 @@ const Links = props => {
     </div>
   );
 };
-  
-  const Header = () => {
-    const mode = useSelector((state) => state.mode.mode);
-    const add_info = useSelector((state) => state.add_info.isShown);
-    const prf = useSelector((state) => state.PullRequestForm.isShown);
-    //const data = useSelector((state) => state.data.yamlString);
-    const dispatch = useDispatch();
 
-    const resetAndFetch = () => {
-      dispatch(ResetToDefault());
-      dispatch(fetchYaml());
-    };
+const Header = () => {
+  const mode = useSelector((state) => state.mode.mode);
+  const add_info = useSelector((state) => state.add_info.isShown);
+  const prf = useSelector((state) => state.PullRequestForm.isShown);
+  //const data = useSelector((state) => state.data.yamlString);
+  const dispatch = useDispatch();
 
-    const displayLinks = {
-      links: [
-        <a href="https://github.com/milltoni/airway.git">GitHub</a>,
-        <a href="https://milltoni.github.io/airway/README.md">About Project</a>
-      ],
-      action: (
-        <a href="#" onClick={() => dispatch(EditorMode())}>
-          Editor mode
-        </a>
-      )
-    };
-  
-    const editorLinks = {
-      links: [
-        <a href="https://github.com/milltoni/airway.git">GitHub</a>,
-        <a href="#" onClick={() => dispatch(ShowOrHideAddInfo(add_info ? false : true))}>How to Use</a>,
-        <a href="#" onClick={() => dispatch(ShowOrHidePRform(prf ? false : true))}>Create Pull Request</a>,
-        <a href="#" onClick={() => resetAndFetch()}>Reset</a>
-      ],
-      action: (
-        <a href="#" onClick={() => dispatch(DisplayMode())}>
-          See as user
-        </a>
-      )
-    };
-  
-    const headerLinks = isEditorMode(mode) ? editorLinks : displayLinks;
-  
-    return (
-      <div className="nav-main">
-        <div className="wrap">
-          <a className="nav-home" href="https://milltoni.github.io/airway">
-            <img
-              className="nav-logo"
-              alt="airway"
-              src={logo}
-              width="36"
-              height="36"
-            />
-            airway
-          </a>
-          <Links links={headerLinks.links} action={headerLinks.action} />
-        </div>
-      </div>
-    );
+  const resetAndFetch = () => {
+    dispatch(ResetToDefault());
+    dispatch(fetchYaml());
   };
-  
-  export default Header;
+
+  const displayLinks = {
+    links: [
+      <a href="https://github.com/milltoni/airway.git">GitHub</a>,
+      <a href="https://milltoni.github.io/airway/README.md">About Project</a>
+    ],
+    action: (
+      <a href="#" onClick={() => dispatch(EditorMode())}>
+        Editor mode
+      </a>
+    )
+  };
+
+  const editorLinks = {
+    links: [
+      <a href="https://github.com/milltoni/airway.git">GitHub</a>,
+      <a href="#" onClick={() => dispatch(ShowOrHideAddInfo(add_info ? false : true))}>How to Use</a>,
+      <a href="#" onClick={() => dispatch(ShowOrHidePRform(prf ? false : true))}>Create Pull Request</a>,
+      <a href="#" onClick={() => resetAndFetch()}>Reset</a>
+    ],
+    action: (
+      <a href="#" onClick={() => dispatch(DisplayMode())}>
+        See as user
+      </a>
+    )
+  };
+
+  const headerLinks = isEditorMode(mode) ? editorLinks : displayLinks;
+
+  return (
+    <div className="nav-main">
+      <div className="wrap">
+        <a className="nav-home" href="https://milltoni.github.io/airway">
+          <img
+            className="nav-logo"
+            alt="airway"
+            src={logo}
+            width="36"
+            height="36"
+          />
+          airway
+        </a>
+        <Links links={headerLinks.links} action={headerLinks.action} />
+      </div>
+    </div>
+  );
+};
+
+export default Header;

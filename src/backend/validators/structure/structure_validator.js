@@ -4,18 +4,18 @@ import { pathToArray } from "../../PathToArray";
 import projectSchema from "./schema";
 
 const ajv = new Ajv({
-  allErrors: true,        
-  verbose: true,          
-  strict: false           
+  allErrors: true,
+  verbose: true,
+  strict: false
 });
 
 const processDataWithPaths = (data, schemaPath = "/") => {
   if (data === null || typeof data !== "object") {
     if (schemaPath.includes("/#/$defs/references/anyReference")) {
-      return {value: data, base: "/#/$defs/references/singleAnyReference"};
+      return { value: data, base: "/#/$defs/references/singleAnyReference" };
     }
-    if (schemaPath.includes("/#/$defs/feature/inspired_by") || schemaPath.includes("/#/$defs/feature/predated_by") || schemaPath.includes("/#/$defs/feature/justified_by")){
-      return {value: data, base: "/#/$defs/references/anyReference"};
+    if (schemaPath.includes("/#/$defs/feature/inspired_by") || schemaPath.includes("/#/$defs/feature/predated_by") || schemaPath.includes("/#/$defs/feature/justified_by")) {
+      return { value: data, base: "/#/$defs/references/anyReference" };
     }
     return { value: data, base: "/" };
   }
@@ -33,15 +33,15 @@ const processDataWithPaths = (data, schemaPath = "/") => {
   }
 
   if (Array.isArray(data)) {
-    const wrappedArray = data.map((item, index) => 
+    const wrappedArray = data.map((item, index) =>
       processDataWithPaths(item, `${schemaPath}/${index}`)
     );
     return { value: wrappedArray, base: schemaPath };
   }
-  
+
   const result = {};
 
-  if (schemaPath.includes("//")){
+  if (schemaPath.includes("//")) {
     schemaPath = "/#/$defs/language";
   }
 
@@ -67,13 +67,13 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
     };
   }
   const valid = validate(jsonObj);
-  
+
   const wrappedData = processDataWithPaths(jsonObj);
-  
+
   const docModel = wrappedData;
-  
+
   let errors = [];
-  
+
   if (!valid && validate.errors) {
     errors = validate.errors.map(err => {
       let path = err.instancePath || "";
@@ -82,7 +82,7 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
       if (!path && err.keyword === "required" && err.params.missingProperty) {
         path = err.params.missingProperty;
       }
-      
+
       let message = err.message || "";
       if (err.keyword === "additionalProperties") {
         message = `has additional property '${err.params.additionalProperty}'`;
@@ -95,10 +95,10 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
       } else if (err.keyword === "enum") {
         message = `must be equal to one of the allowed values: ${err.params.allowedValues.join(", ")}`;
       }
-      
+
       const pathArray = path ? pathToArray(path) : [];
       const line = path ? getLineForPath(yamlString, pathArray) : null;
-      
+
       return {
         line: line,
         message: path ? `${path} ${message}` : message,
@@ -106,7 +106,7 @@ const validateCustomSchema = (jsonObj, yamlString, schema) => {
       };
     });
   }
-  
+
   return {
     docModel: docModel,
     errors: errors

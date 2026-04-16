@@ -7,9 +7,11 @@ import ChordGraph from "../ChordGraph/chord_graph";
 import HowToUse from "./howtouse_field/HowToUse";
 import Editor from "./editor/Editor";
 import PullRequestForm from "./PullRequest_form/pr_form";
+import InfoField from "../info_field/InfoField";
 import EditorField from "./editor_field/EditorField";
 
 import "./EditorContainer.css"
+
 
 const EditorContainer = () => {
     const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const EditorContainer = () => {
             <div className="container">
                 <div className="right">
                     <ChordGraph />
+                    <InfoField />
                 </div>
                 <div className="left">
                     <Editor />

@@ -4,6 +4,7 @@ import React from "react";
 //import ForceGraph from "../ForceGraph/ForceGraph";
 import ChordGraph from "../ChordGraph/chord_graph";
 import EditorField from "../editor_mode/editor_field/EditorField";
+import InfoField from "../info_field/InfoField";
 
 import "./BrowseField.css"
 
@@ -18,6 +19,7 @@ const BrowseField = () => {
         <ChordGraph />
       </div>
       <div className="left2">
+        <InfoField />
       </div>
     </div>
   );
