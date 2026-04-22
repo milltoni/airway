@@ -11,6 +11,7 @@ export const dataSlice = createSlice({
         instanceMatrix: null,
         instanceMap: null,
         errors: [],
+        line: null,
     },
     reducers: {
         ResetToDefault: (state) => {
@@ -28,8 +29,9 @@ export const dataSlice = createSlice({
         },
         Validate: (state) => {state.errors = validateYamlString(state.yamlString).errors},
         setValue: (state, action) => {state.yamlString = action.payload},
+        setLineToGoTo: (state, action) => {state.line = action.payload},
     }
 })
 
-export const {ResetToDefault, fetchYaml, ExtractInstanceMap, Validate, setValue} = dataSlice.actions
+export const {ResetToDefault, fetchYaml, ExtractInstanceMap, Validate, setValue, setLineToGoTo} = dataSlice.actions
 export default dataSlice.reducer

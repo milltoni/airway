@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Airway
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Airwa](https://milltoni.github.io/airway/#) is an interactive tool for detailed analysis of the evolution and interconnections of programming languages. Unlike many other projects that only show high-level relationships, Airway focuses on data accuracy and deep analysis at the level of specific features.
 
-## Available Scripts
+## 🔬 Detailed Inheritance Analysis
 
-In the project directory, you can run:
+The main feature of Airway is the ability to see *how* exactly one language influenced another. Instead of an abstract "influenced by" line, you can explore which specific features, syntactic constructs, or paradigms were inherited. This allows you to trace not just the history, but the meaningful evolution of ideas in programming.
 
-### `npm start`
+## 🗄️ Data Architecture & Quality
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The project is built around data reliability and extensibility:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Data Source:** All information is stored in a simple, human-readable YAML document. This makes the knowledge base easy to edit and understand.
+- **Structural & Semantic Validation:** When adding or updating information, the system automatically checks the correctness of the YAML files (structural validation) and the logical consistency of relationships between languages (semantic validation). This guarantees high quality and accuracy of the displayed data.
+- **Collaboration:** Thanks to the widespread use of Git, anyone can propose additions or corrections via pull requests on GitHub, contributing to the continuous development and refinement of the programming language knowledge base.
 
-### `npm test`
+## 🖱️ How to Interact
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The page features an interactive graph where:
 
-### `npm run build`
+- **Explore Connections:** Selecting a language highlights all its connections, and you can get detailed information about each inherited aspect.
+- **Editor Mode:** The interface includes an "Editor mode," allowing users to make changes to the data directly through the web interface.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 💎 Summary
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+While other similar projects provide a general overview, Airway offers a unique depth of analysis. It is a tool not so much for a quick glance, but for researchers, educators, and anyone who wants to understand not just "what influenced what," but *how* exactly it happened, down to specific language capabilities.

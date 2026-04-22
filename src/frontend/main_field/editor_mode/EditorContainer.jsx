@@ -8,9 +8,10 @@ import HowToUse from "./howtouse_field/HowToUse";
 import Editor from "./editor/Editor";
 import PullRequestForm from "./PullRequest_form/pr_form";
 import InfoField from "../info_field/InfoField";
-import EditorField from "./editor_field/EditorField";
+import ErrorField from "./error_field/ErrorField";
 
 import "./EditorContainer.css"
+
 
 
 const EditorContainer = () => {
@@ -27,6 +28,7 @@ const EditorContainer = () => {
                 </div>
                 <div className="left">
                     <Editor />
+                    <ErrorField />
                 </div>
             </div>
         </div>

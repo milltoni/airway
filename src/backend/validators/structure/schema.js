@@ -46,7 +46,8 @@ export default {
           },
           justified_by: {
             $ref: "#/$defs/references/anyReference"
-          }
+          },
+          source: {type: "string"}
         },
         required: ["description"]
       },

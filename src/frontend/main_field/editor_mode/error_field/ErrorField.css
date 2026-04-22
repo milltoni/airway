@@ -1,0 +1,37 @@
+.error {
+    padding: 10px;
+    margin: 10px;
+    font-size: 12px;
+}
+
+.errors_container {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    background: #ffc0bc;
+    max-height: 20vh;
+}
+
+.errors__header {
+    background-color: #ff807d;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 3px 3px;
+    font-size: 16px;
+    color: white;
+}
+
+.errors__body {
+    padding: 3px 3px 10px 7px;
+    line-height: 1.5;
+    font-size: 12px;
+    font-family: 'source-code-pro', Menlo, Consolas, 'Courier New', monospace;
+}
+
+
+.list_without_bullets {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
