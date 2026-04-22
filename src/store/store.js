@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import modeReducer from './slices/modeSlice'
 import add_infoReducer from './slices/add_infoSlice'
 import dataReducer from './slices/dataSlice'
-import pullrequestReducer from './slices/pullrequestSlice'
+import pullRequestReducer from './slices/pullrequestSlice'
 import graphReducer from './slices/graphSlice'
 import about_projectReducer from './slices/about_projectSlice'
 
@@ -12,7 +12,7 @@ export default configureStore({
     mode: modeReducer,
     add_info: add_infoReducer,
     data: dataReducer,
-    PullRequestForm: pullrequestReducer,
+    pullRequestForm: pullRequestReducer,
     graph: graphReducer,
     about_project: about_projectReducer
   },

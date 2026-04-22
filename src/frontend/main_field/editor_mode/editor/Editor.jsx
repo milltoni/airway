@@ -106,6 +106,8 @@ const Editor = () => {
         fontFamily: "Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif",
         cursorStyle: "smooth",
         enableMultiselect: false,
+        enableBasicAutocompletion: true,
+        enableLiveAutocompletion: true,
       }}
     />
   );
